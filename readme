@@ -1,0 +1,1 @@
+This repository contains a Python code implementation of the Tower of Hanoi problem and various pattern drawing functions. It includes a test suite using the unittest framework to verify the correctness of these functions. The code is designed to accept user inputs for shape and size and display patterns, and also to solve the Tower of Hanoi problem.
