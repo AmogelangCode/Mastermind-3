@@ -1,29 +1,48 @@
 
 # TODO: Step 1 - return shape from user input (it can't be blank and must be a valid shape!)     
 def get_shape():
-    
-    return ""
+
+    shape = input("Enter valid shape : ").lower()
+    while shape not in ["square","triangle","pyramid"]:
+        shape = input("Enter valid shape :").lower()
+    return shape
 
 
 # TODO: Step 2 - return height from user input (it must be int!)
 #       The maximum possible height must be 80
 def get_height():
     
-    return ""
-
+    height = input("Enter valid height : ")
+    while not height.isdigit() or int(height) > 80:
+        height = input("Enter valid height : ")
+    return int(height)
 
 # TODO: Step 3 Complete the required shapes below
 #       with reference to the unittests
 def draw_square(height):
-    pass
+    output = ""
+    for i in range(height):
+        for j in range(height):
+            print("*", end="")
+        print()
+    #         output += "*"
+    #     output += "\n"
+    # print(output)
+    # return output
 
 
 def draw_triangle_reversed(height):
-    pass
+    for i in range(1, height + 1):
+        for j in range((height + 1 -i)):
+            print(i, end =" ")
+        print()
 
 
 def draw_triangle(height):
-    pass
+    for i in range(1,height + 1):
+        for j in range(1, i + 1):
+            print(j, end=" ")
+        print()
 
 
 def draw_triangle_multiplication(height):
@@ -56,6 +75,11 @@ def draw_triangle_prime(height):
 def draw(shape, height):
     if shape == "pyramid":
         draw_pyramid(height)
+    if shape == "square":
+        draw_square(height)
+    if shape == "triangle":
+        # draw_triangle_reversed(height)
+        draw_triangle(height)
 
 
 
