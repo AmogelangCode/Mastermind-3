@@ -25,11 +25,6 @@ def draw_square(height):
         for j in range(height):
             print("*", end="")
         print()
-    #         output += "*"
-    #     output += "\n"
-    # print(output)
-    # return output
-
 
 def draw_triangle_reversed(height):
     for i in range(1, height + 1):
@@ -46,11 +41,17 @@ def draw_triangle(height):
 
 
 def draw_triangle_multiplication(height):
-    pass
+        for i in range(1, height+1):
+            for j in range(i):
+                print(i * (j +1),end=" ")
+            print()
+
 
 
 def draw_pyramid(height):
-    pass
+    for i in range(height):
+        print(" " * (height - i - 1) + ("*" * (i + (i + 1))))
+
 
 
 def draw_triangle_prime(height):

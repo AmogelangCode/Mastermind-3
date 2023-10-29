@@ -82,6 +82,30 @@ class TestPatterns(unittest.TestCase):
             self.assertEqual(mock_output.getvalue().strip(), output)
     
 
+    """mocks height to use it as the argument """
+    @patch("patterns.get_height") 
+    def test_draw_pyramid(self, mock_height):
+        mock_height.return_value = 5
+        output = "*\n   ***\n  *****\n *******\n*********"
+        
+        """"redirects the print output of draw pyramid to become mock output"""
+        with patch("sys.stdout", new_callable=StringIO) as mock_output:
+            patterns.draw_pyramid(mock_height())
+            self.assertEqual(mock_output.getvalue().strip(), output)
+
+
+    """mocks height to use it as the argument """
+    @patch("patterns.get_height") 
+    def test_draw_triangle_multiplication(self, mock_height):
+        mock_height.return_value = 3
+        output = "1 \n2 4 \n3 6 9"
+        
+        """"redirects the print output of draw pyramid to become mock output"""
+        with patch("sys.stdout", new_callable=StringIO) as mock_output:
+            patterns.draw_triangle_multiplication(mock_height())
+            self.assertEqual(mock_output.getvalue().strip(), output)
+
+
 
 
 
