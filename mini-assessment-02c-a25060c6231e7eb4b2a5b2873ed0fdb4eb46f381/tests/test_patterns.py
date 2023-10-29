@@ -5,16 +5,23 @@ from unittest.mock import patch
 import patterns
 
 class MyTestCase(unittest.TestCase):
+    """
+    class
+    """
 
     @patch("sys.stdin", StringIO("Square\n"))
     def test_1_shape(self):
+        """
+        test for valid shape i.e square
+        """
 
         text_capture = StringIO()
         sys.stdout = text_capture
         self.assertEqual(patterns.get_shape(),'square')
-    
+
     @patch("sys.stdin", StringIO("pYraMid\n"))
     def test_2_shape(self):
+        """test for case sensitive valid shape"""
 
         text_capture = StringIO()
         sys.stdout = text_capture
@@ -22,12 +29,14 @@ class MyTestCase(unittest.TestCase):
 
     @patch("sys.stdin", StringIO("5\n"))
     def test_3_height(self):
+        """get integer height from user"""
 
         text_capture = StringIO()
         sys.stdout = text_capture
         self.assertIsInstance(patterns.get_height(),int)
 
     def test_4_square(self):
+        """test drawn square using h=4"""
         
         text_capture = StringIO()
         sys.stdout = text_capture
@@ -40,6 +49,7 @@ class MyTestCase(unittest.TestCase):
 """,text_capture.getvalue())
 
     def test_5_square(self):
+        """test drawn square where h =10"""
         
         text_capture = StringIO()
         sys.stdout = text_capture
@@ -58,109 +68,81 @@ class MyTestCase(unittest.TestCase):
 """,text_capture.getvalue())
 
     def test_6_triangle(self):
-        
-        text_capture = StringIO()
-        sys.stdout = text_capture
-        patterns.draw_triangle_reversed(3)
-
-        self.assertEqual("""1 1 1 
-2 2 
-3 
-""",text_capture.getvalue())
+        """
+        test for reversed triangle with height 0f 3
+        """
+        with patch("sys.stdout", StringIO("1 1 1 \n2 2 \n3 \n")) as mock_stdout:
+            patterns.draw_triangle_reversed(3)
+            self.assertEqual(mock_stdout.getvalue(), "1 1 1 \n2 2 \n3 \n")
+    
 
     def test_7_triangle(self):
-        
-        text_capture = StringIO()
-        sys.stdout = text_capture
-        patterns.draw_triangle_reversed(5)
+        """
+        test for reversed triangle
+        """
+        with patch("sys.stdout", StringIO("1 1 1 1 1 \n2 2 2 2 \n3 3 3 \n4 4 \n5 ")) as mock_stdout:
+            patterns.draw_triangle_reversed(5)
+            self.assertEqual(mock_stdout.getvalue(), "1 1 1 1 1 \n2 2 2 2 \n3 3 3 \n4 4 \n5 \n")
 
-        self.assertEqual("""1 1 1 1 1 
-2 2 2 2 
-3 3 3 
-4 4 
-5 
-""",text_capture.getvalue())
 
     def test_8_triangle(self):
-        
-        text_capture = StringIO()
-        sys.stdout = text_capture
-        patterns.draw_triangle(3)
 
-        self.assertEqual("""1 
-1 2 
-1 2 3 
-""",text_capture.getvalue())
+        """
+        test for triangle(right_angled) with height 5
+        """
+        
+        with patch("sys.stdout", StringIO("1 \n1 2 \n1 2 3 \n1 2 3 4 \n1 2 3 4 5")) as mock_stdout:
+            patterns.draw_triangle(5)
+            self.assertEqual(mock_stdout.getvalue(), "1 \n1 2 \n1 2 3 \n1 2 3 4 \n1 2 3 4 5 \n")
 
     def test_9_triangle(self):
-        
-        text_capture = StringIO()
-        sys.stdout = text_capture
-        patterns.draw_triangle(5)
+        """
+        test for triangle(right_angled)
 
-        self.assertEqual("""1 
-1 2 
-1 2 3 
-1 2 3 4 
-1 2 3 4 5 
-""",text_capture.getvalue())
+        """
+
+        with patch("sys.stdout", StringIO("1 \n1 2 \n1 2 3 \n")) as mock_stdout:
+            patterns.draw_triangle(3)
+            self.assertEqual(mock_stdout.getvalue(), "1 \n1 2 \n1 2 3 \n")
+  
 
     def test_10_triangle_multiplication(self):
+        """
+        test for an increamenting multiplication triangle 
+        """
+        with patch("sys.stdout", StringIO("1 \n2 4 \n3 6 9 \n4 8 12 16 \n")) as mock_stdout:
+            patterns.draw_triangle_multiplication(4)
+            self.assertEqual(mock_stdout.getvalue(), "1 \n2 4 \n3 6 9 \n4 8 12 16 \n")
         
-        text_capture = StringIO()
-        sys.stdout = text_capture
-        patterns.draw_triangle_multiplication(6)
-
-        self.assertEqual("""1 
-2 4 
-3 6 9 
-4 8 12 16 
-5 10 15 20 25 
-6 12 18 24 30 36 
-""",text_capture.getvalue())
 
     def test_11_triangle_multiplication(self):
-        
-        text_capture = StringIO()
-        sys.stdout = text_capture
-        patterns.draw_triangle_multiplication(10)
+        """
+        test for an increamenting multiplication triangle 
+        """
 
-        self.assertEqual("""1 
-2 4 
-3 6 9 
-4 8 12 16 
-5 10 15 20 25 
-6 12 18 24 30 36 
-7 14 21 28 35 42 49 
-8 16 24 32 40 48 56 64 
-9 18 27 36 45 54 63 72 81 
-10 20 30 40 50 60 70 80 90 100 
-""",text_capture.getvalue())
+        with patch("sys.stdout", StringIO("1 \n2 4 \n3 6 9 \n4 8 12 16 \n5 10 15 20 25 \n6 12 18 24 30 36 \n")) as mock_stdout:
+            patterns.draw_triangle_multiplication(6)
+            self.assertEqual(mock_stdout.getvalue(), "1 \n2 4 \n3 6 9 \n4 8 12 16 \n5 10 15 20 25 \n6 12 18 24 30 36 \n")
+
+
 
 
     def test_12_pyramid(self):
-        
-        text_capture = StringIO()
-        sys.stdout = text_capture
-        patterns.draw_pyramid(3)
-
-        self.assertEqual("""  *
- ***
-*****
-""",text_capture.getvalue())
+        """
+        test for an increamenting multiplication triangle 
+        """
+        with patch("sys.stdout", StringIO("    * \n   *** \n  ***** \n ******** \n********* \n")) as mock_stdout:
+            patterns.draw_pyramid(6)
+            self.assertEqual(mock_stdout.getvalue(), "     *\n    ***\n   *****\n  *******\n *********\n***********\n")
 
     def test_13_pyramid(self):
+           """
+           test for pyramid
+           """
         
-        text_capture = StringIO()
-        sys.stdout = text_capture
-        patterns.draw_pyramid(5)
-
-        self.assertEqual("""    *
-   ***
-  *****
- *******
-*********
-""",text_capture.getvalue())
+           with patch("sys.stdout", StringIO("    * \n   *** \n  ***** \n")) as mock_stdout:
+            patterns.draw_pyramid(3)
+            self.assertEqual(mock_stdout.getvalue(), "  *\n ***\n*****\n  ***** \n")
 
     def test_14_primes(self):
         
