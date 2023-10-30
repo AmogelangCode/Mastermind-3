@@ -1,30 +1,38 @@
 
 # TODO: Step 1 - return shape from user input (it can't be blank and must be a valid shape!)     
 def get_shape():
-    
-    return ""
+    shape=input()
+    return shape.lower()
 
 
 # TODO: Step 2 - return height from user input (it must be int!)
 #       The maximum possible height must be 80
 def get_height():
-    
-    return ""
+    height=int(input())
+    return height
 
 
 # TODO: Step 3 Complete the required shapes below
 #       with reference to the unittests
 def draw_square(height):
-    pass
+    for i in range(height):
+        print("*"*height)
 
 
 def draw_triangle_reversed(height):
-    pass
+    reference=height
+    for i in range(height):
+        for j in range(reference):
+            print(str(i+1)+" ",end="")
+        print()
+        reference-=1
 
 
 def draw_triangle(height):
-    pass
-
+    for i in range(height):
+        for j in range(i+1):
+            print(str(j+1)+" ",end="")
+        print()
 
 def draw_triangle_multiplication(height):
     pass
@@ -77,7 +85,10 @@ def tower_of_hanoi(n, source, auxiliary, target):
     >>> tower_of_hanoi(3, 'A', 'B', 'C')
     [('A', 'C'), ('A', 'B'), ('C', 'B'), ('A', 'C'), ('B', 'A'), ('B', 'C'), ('A', 'C')]
     """
-    return ""
+    if n==1:
+        return [(source,target)]
+    else:
+        return tower_of_hanoi(n-1,source,target,auxiliary)+[(source,target)]+tower_of_hanoi(n-1,auxiliary,source,target)
 
 
 if __name__ == "__main__":
